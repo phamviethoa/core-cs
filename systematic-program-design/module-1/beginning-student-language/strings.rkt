@@ -7,3 +7,4 @@
 (string-length "Hoa Pham")
 
 (substring "Hello World!" 0 5)
+
