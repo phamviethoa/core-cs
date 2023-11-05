@@ -1,0 +1,52 @@
+#lang racket
+
+; PROBLEM:
+;
+; (A) Design a data definition to represent an arbitrary number of images.
+;
+; (B) Design a function called arrange-images that comsumes an arbitrary number
+; of images and lays them out left to right in increasing order of size.
+
+
+(require 2htdp/image)
+(require 2htdp/universe)
+(require test-engine/racket-tests)
+
+;; Constant:
+
+;; Data Definitions:
+
+;; ListOfImage is one of:
+;; - empty
+;; - (cons Image ListOfImage)
+;; interp. list of images
+
+(define LOI1 empty)
+(define LOI2 (cons (square 5 "solid" "black") empty))
+(define LOI3 (cons (rectangle 10 5 "solid" "white") LOI2))
+
+;(define (fn-for-loi loi) 
+  ;(cond [(empty? loi) (...)]
+        ;[else (... (first loi)
+                   ;(fn-for-loi (rest loi)))]))
+
+;; Template rules used:
+;; - one of: 2 cases
+;; - atomic distinct: empty
+;; - compound: (cons Image ListOfImage)
+;; - self-reference: (rest loi) is ListOfImage
+
+(define (main i)
+  (big-bang i ; Image
+            (to-draw render))) ; Image -> Image
+
+;; Functions:
+
+;; Image -> Image
+;; Produce the comsumes image and draw it to the screen.
+
+(check-expect (render (square 10 "solid" "black")) (square 10 "solid" "black"))
+
+;(define (render i) (square 0 "solid" "black")) ; stub
+
+(define (render i) i)
